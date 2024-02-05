@@ -1,7 +1,15 @@
 // Add the required components
 const inquirer = require("inquirer");
-const fs = require("fs");
+const mysql = require('mysql2');
 
+// Connect to database
+const db = require("./config/connect");
+
+let command;
+
+init();
+
+function init() {
 // Create the inquirer prompts for the user to answer
 inquirer
   .prompt([
@@ -9,19 +17,40 @@ inquirer
       type: "list",
       message: "What would you like to do?",
       choices: [
-        { value: "View All Employees" },
-        { value: "Add Employee" },
-        { value: "Update Employee Role" },
-        { value: "View All Roles" },
-        { value: "Add Role" },
-        { value: "View All Departments" },
-        { value: "Add Department" },
+        { name: "View All Employees", value: "viewEmps" },
+        { name: "Add Employee", value: "addEmp" },
+        { name: "Update Employee Role", value: "updateRole" },
+        { name: "View All Roles", value: "viewRoles"},
+        { name: "Add Role", value: "addRole"},
+        { name: "View All Departments", value: "viewDepts" },
+        { name: "Add Department", value: "addDept" },
+        { name: "Quit", value: "quit" },
       ],
-      name: "options",
+      name: "selection",
     },
   ])
 
-  // Process the user's responses and determine the correct shape object
+  // Receive the user's selection and run function to evaluate
   .then((response) => {
-    console.log("To be continued...");
+    command = response.selection;
+    if (command === "quit") {
+      console.log("Quit successful. See you next time!");
+      process.exit();
+    } else evaluateSelection(command);
   });
+}
+
+async function evaluateSelection(command) {
+  if (command === "viewDepts") {
+    db.query('SELECT id, name FROM department ORDER BY name ASC', function (err, results) {
+      console.log(results);
+    });
+  }
+  else if (command === "viewRoles") {
+    db.query('SELECT role.id, title, department.name, salary FROM role JOIN department ON role.department_id = department.id', function (err, results) {
+      console.log(results);
+    });
+  }
+
+  init();
+}
