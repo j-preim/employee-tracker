@@ -3,11 +3,11 @@ const inquirer = require("inquirer");
 const mysql = require('mysql2');
 
 // Connect to database
-const db = require("./config/connect");
+const db = require("./config/connection");
 
 let command;
 
-init();
+// init();
 
 function init() {
 // Create the inquirer prompts for the user to answer

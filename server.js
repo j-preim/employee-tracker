@@ -12,9 +12,6 @@ app.use(express.json());
 
 app.use(routes);
 
-// Connect to database
-const db = require("./config/connect");
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Express is now up and running on http://localhost:${PORT}`)
 });
