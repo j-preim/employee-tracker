@@ -4,19 +4,19 @@ const db = require("../config/connection")
 
 
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM customers", (err, data) => {
+  db.query("SELECT id, name FROM department ORDER BY name ASC", (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })
 
 router.get("/:id", (req, res) => {
-  db.query("SELECT * FROM customers WHERE id = ?", req.params.id, (err, data) => {
+  db.query("SELECT id, name FROM department WHERE id = ?", req.params.id, (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })
 
 router.post("/", (req, res) => {
-  db.query(`INSERT INTO customers(name, email) VALUES('${req.body.name}, ${req.body.email})`, req.params.id, (err, data) => {
+  db.query(`INSERT INTO department(name) VALUES('${req.body.name})`, req.params.id, (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })

@@ -4,13 +4,24 @@ const db = require("../config/connection")
 
 
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM customers", (err, data) => {
+  db.query(`SELECT e.id, e.first_name, e.last_name, role.title, department.name as department, role.salary, CONCAT(m.first_name, ' ', m.last_name) as "manager" 
+  FROM employee as e
+  JOIN role ON e.role_id = role.id 
+  JOIN department ON role.department_id = department.id
+  LEFT JOIN employee as m
+  ON m.id = e.manager_id`, (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })
 
 router.get("/:id", (req, res) => {
-  db.query("SELECT * FROM customers WHERE id = ?", req.params.id, (err, data) => {
+  db.query(`SELECT e.id, e.first_name, e.last_name, role.title, department.name as department, role.salary, CONCAT(m.first_name, ' ', m.last_name) as "manager" 
+  FROM employee as e
+  JOIN role ON e.role_id = role.id 
+  JOIN department ON role.department_id = department.id
+  LEFT JOIN employee as m
+  ON m.id = e.manager_id
+  WHERE e.id = ?`, req.params.id, (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })

@@ -4,13 +4,13 @@ const db = require("../config/connection")
 
 
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM customers", (err, data) => {
+  db.query("SELECT role.id, title, department.name as department, salary FROM role JOIN department ON role.department_id = department.id", (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })
 
 router.get("/:id", (req, res) => {
-  db.query("SELECT * FROM customers WHERE id = ?", req.params.id, (err, data) => {
+  db.query("SELECT role.id, title, department.name as department, salary FROM role JOIN department ON role.department_id = department.id WHERE role.id = ?", req.params.id, (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })

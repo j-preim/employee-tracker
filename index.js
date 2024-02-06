@@ -7,6 +7,15 @@ const db = require("./config/connection");
 
 let command;
 
+console.log(
+  `
+  ,-------------------------------.
+  |                               |
+  |  WELCOME TO EMPLOYEE MANAGER  |
+  |                               |
+  '-------------------------------'
+  `)
+
 // init();
 
 function init() {

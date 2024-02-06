@@ -5,9 +5,9 @@ const departmentRoutes = require("./department.routes");
 const roleRoutes = require("./role.routes");
 const employeeRoutes = require("./employee.routes");
 
-router.use("/department", departmentRoutes);
-router.use("/role", roleRoutes);
-router.use("/employee", employeeRoutes);
+router.use("/departments", departmentRoutes);
+router.use("/roles", roleRoutes);
+router.use("/employees", employeeRoutes);
 
 
 module.exports = router;
