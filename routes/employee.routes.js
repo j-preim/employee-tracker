@@ -27,16 +27,15 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-  db.query(`INSERT INTO customers(name, email) VALUES('${req.body.name}, ${req.body.email})`, req.params.id, (err, data) => {
+  db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES(${req.body.first_name}, ${req.body.last_name}, ${req.body.role_id}, ${req.body.manager_id})`, (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })
 
 router.put("/:id", (req, res) => {
   db.query(`
-    UPDATE customers 
-    SET name = '${req.body.name}', 
-        email = '${req.body.email}' 
+    UPDATE employee 
+    SET role_id = '${req.body.role_id}'
     WHERE id = ?
   `, 
   req.params.id, 

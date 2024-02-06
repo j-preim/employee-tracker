@@ -16,20 +16,7 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-  db.query(`INSERT INTO department(name) VALUES('${req.body.name})`, req.params.id, (err, data) => {
-    res.json({ status: "success", payload: data })
-  })
-})
-
-router.put("/:id", (req, res) => {
-  db.query(`
-    UPDATE customers 
-    SET name = '${req.body.name}', 
-        email = '${req.body.email}' 
-    WHERE id = ?
-  `, 
-  req.params.id, 
-  (err, data) => {
+  db.query(`INSERT INTO department(name) VALUES(${req.body.name})`, (err, data) => {
     res.json({ status: "success", payload: data })
   })
 })
