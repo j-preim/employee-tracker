@@ -7,15 +7,7 @@ const db = require("./config/connection");
 
 // Add required modules
 const prompts = require("./util/prompts");
-const {
-  getDepartments,
-  postDepartment,
-  getRoles,
-  postRole,
-  putRole,
-  getEmployees,
-  postEmployee,
-} = require("./util/queries");
+const queries = require("./util/queries");
 
 console.log(
   `
@@ -33,10 +25,11 @@ function init() {
   mainMenu();
 };
 
-function mainMenu() {
+async function mainMenu() {
+  const promptsList = await prompts();
   // Create the inquirer prompts for the user to answer
   inquirer
-    .prompt(prompts)
+    .prompt(promptsList)
 
     // Receive the user's selection and run function to evaluate
     .then((response) => {
@@ -48,6 +41,15 @@ function mainMenu() {
 }
 
 async function evaluateSelection(response) {
+  const {
+    getDepartments,
+    postDepartment,
+    getRoles,
+    postRole,
+    putRole,
+    getEmployees,
+    postEmployee,
+  } = queries(response);
   const command = await response.selection;
   if (command === "viewDepts") {
     db.query(getDepartments, function (err, data) {
@@ -66,8 +68,14 @@ async function evaluateSelection(response) {
       console.log(`${response.deptName} department added!`);
     });
   } else if (command === "addRole") {
+    console.log(postRole);
     db.query(postRole, function (err, data) {
+      if (err) {
+        console.log(err);
+      }
+      else {
       console.log(`${response.roleName} role added!`);
+      }
     });
   } else if (command === "addEmp") {
     db.query(postEmployee, function (err, data) {
