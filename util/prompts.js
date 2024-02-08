@@ -47,10 +47,12 @@ const prompts = async () => {
         { name: "View All Employees", value: "viewEmps" },
         { name: "Add Employee", value: "addEmp" },
         { name: "Update Employee Role", value: "updateRole" },
+        { name: "Update Employee Manager", value: "updateMgr" },
         { name: "View All Roles", value: "viewRoles" },
         { name: "Add Role", value: "addRole" },
         { name: "View All Departments", value: "viewDepts" },
         { name: "Add Department", value: "addDept" },
+        { name: "View Total Utilized Budget by Department", value: "viewBudget" },
         { name: "Quit", value: "quit" },
       ],
       name: "selection",
@@ -140,7 +142,7 @@ const prompts = async () => {
       type: "list",
       message: "Choose an employee:",
       choices: employees,
-      name: "selectedEmp",
+      name: "selectedEmpUpdateRole",
       when: (answers) => answers.selection === "updateRole",
     },
     {
@@ -149,6 +151,20 @@ const prompts = async () => {
       choices: roles,
       name: "newRole",
       when: (answers) => answers.selection === "updateRole",
+    },
+    {
+      type: "list",
+      message: "Choose an employee:",
+      choices: employees,
+      name: "selectedEmpUpdateMgr",
+      when: (answers) => answers.selection === "updateMgr",
+    },
+    {
+      type: "list",
+      message: "Choose a new manager:",
+      choices: employees,
+      name: "newMgr",
+      when: (answers) => answers.selection === "updateMgr",
     },
   ];
 };
