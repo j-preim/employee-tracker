@@ -1,8 +1,4 @@
-// Connect to database
-const db = require("../config/connection");
-
 module.exports = (response = {}) => {
-  // response.deptName = Object.hasOwnProperty.call(response, "deptName") ? response.deptName : "";
   
   return {
     getDepartments: "SELECT id, name FROM department ORDER BY name ASC",
@@ -27,25 +23,3 @@ module.exports = (response = {}) => {
   };
 };
 
-// const query = () => {
-// return db.query(
-//   `SELECT id, name FROM department ORDER BY name ASC`,
-//   function (err, data) {
-//     console.log(data[0].name);
-//   }
-// );
-// }
-
-// var dataArray = [{}];
-
-// function queryFunction() {
-//   db.query(
-//     `SELECT id, name FROM department ORDER BY name ASC`,
-//     function (err, data) {
-//       for (i = 0; i < data.length; i++) {
-//         dataArray.push(data[i]);
-//       }
-//     }
-//   );
-
-// }

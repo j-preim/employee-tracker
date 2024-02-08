@@ -19,12 +19,6 @@ console.log(
   `
 );
 
-init();
-
-function init() {
-  mainMenu();
-};
-
 async function mainMenu() {
   const promptsList = await prompts();
   // Create the inquirer prompts for the user to answer
@@ -54,43 +48,54 @@ async function evaluateSelection(response) {
   if (command === "viewDepts") {
     db.query(getDepartments, function (err, data) {
       console.table(data);
+      mainMenu();
     });
   } else if (command === "viewRoles") {
     db.query(getRoles, function (err, data) {
       console.table(data);
+      mainMenu();
     });
   } else if (command === "viewEmps") {
     db.query(getEmployees, function (err, data) {
       console.table(data);
+      mainMenu();
     });
   } else if (command === "addDept") {
     db.query(postDepartment, function (err, data) {
       console.log(`${response.deptName} department added!`);
+      mainMenu();
     });
   } else if (command === "addRole") {
     console.log(postRole);
     db.query(postRole, function (err, data) {
       if (err) {
         console.log(err);
+      } else {
+        console.log(`${response.roleName} role added!`);
       }
-      else {
-      console.log(`${response.roleName} role added!`);
-      }
+      mainMenu();
     });
   } else if (command === "addEmp") {
     db.query(postEmployee, function (err, data) {
       console.log(
         `${response.empFirstName} ${response.empLastName} added to employees!`
       );
+      mainMenu();
     });
   } else if (command === "updateRole") {
     db.query(putRole, function (err, data) {
       console.log(
         `${response.selectedEmp} role updated to ${response.newRole}!`
       );
+      mainMenu();
     });
   }
+  
 
-  // process.exit();
-  init();
 }
+
+function init() {
+  mainMenu();
+}
+
+init();
