@@ -18,7 +18,7 @@ async function roleChoices() {
   let roleChoiceValues = [];
   db.query(getRoles, function (err, data) {
     for (i = 0; i < data.length; i++) {
-      roleChoiceValues.push({ name: data[i].name, value: data[i].id });
+      roleChoiceValues.push({ name: data[i].title, value: data[i].id });
     }
   });
   return roleChoiceValues;
@@ -26,9 +26,9 @@ async function roleChoices() {
 
 async function employeeChoices() {
   let employeeChoiceValues = [];
-  db.query(getemployee, function (err, data) {
+  db.query(getEmployees, function (err, data) {
     for (i = 0; i < data.length; i++) {
-      employeeChoiceValues.push({ name: data[i].name, value: data[i].id });
+      employeeChoiceValues.push({ name: `${data[i].first_name} ${data[i].last_name}`, value: data[i].id });
     }
   });
   return employeeChoiceValues;

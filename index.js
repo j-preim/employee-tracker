@@ -92,5 +92,5 @@ async function evaluateSelection(response) {
   }
 
   // process.exit();
-  //init();
+  init();
 }
