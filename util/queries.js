@@ -1,5 +1,6 @@
 module.exports = (response = {}) => {
   
+  // Formatted query text
   return {
     getDepartments: "SELECT id, name FROM department ORDER BY name ASC",
 

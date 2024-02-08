@@ -9,6 +9,7 @@ const db = require("./config/connection");
 const prompts = require("./util/prompts");
 const queries = require("./util/queries");
 
+// App welcome text
 console.log(
   `
   ,-------------------------------.
@@ -19,6 +20,7 @@ console.log(
   `
 );
 
+// Generate main menu prompts, process user selection
 async function mainMenu() {
   const promptsList = await prompts();
   // Create the inquirer prompts for the user to answer
@@ -34,6 +36,7 @@ async function mainMenu() {
     });
 }
 
+// Function to evaluate user selection and run appropriate query
 async function evaluateSelection(response) {
   const {
     getDepartments,

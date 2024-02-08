@@ -4,6 +4,7 @@ const db = require("../config/connection");
 // Require queries
 const { getDepartments, getRoles, getEmployees } = require("../util/queries")();
 
+//Functions to generate conditional prompt choices
 async function deptChoices() {
   let deptChoiceValues = [];
   db.query(getDepartments, function (err, data) {
@@ -39,6 +40,7 @@ const prompts = async () => {
   const roles = await roleChoices();
   const employees = await employeeChoices();
 
+// All inquirer prompts
   return [
     {
       type: "list",
