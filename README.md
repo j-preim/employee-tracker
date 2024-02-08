@@ -6,7 +6,7 @@ The purpose of this project is to build a command-line application from scratch 
 
 ## Installation
 
-A video showing the functionality of this project can be found here: https://drive.google.com/file/d/1jRvEG5tqcqqbcR_o7aJ-d2EgT0eYNLLT/view
+A video showing the functionality of this project can be found here: https://drive.google.com/file/d/1I5cgg9bFjgNT4uFj1uQnX3WCpOHp9xzt/view
 
 ## Usage
 
