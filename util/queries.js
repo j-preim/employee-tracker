@@ -6,7 +6,8 @@ module.exports = (response = {}) => {
     postDepartment: `INSERT INTO department(name) VALUES('${response.deptName}')`,
 
     getDeptBudget: `SELECT d.name as department, (SUM(r.salary)) as total_utilized_budget
-    FROM role as r
+    FROM employee as e
+    JOIN role as r ON e.role_id = r.id 
     JOIN department as d ON r.department_id = d.id
     GROUP BY d.name`,
 

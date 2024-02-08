@@ -73,7 +73,6 @@ async function evaluateSelection(response) {
       mainMenu();
     });
   } else if (command === "addRole") {
-    console.log(postRole);
     db.query(postRole, function (err, data) {
       if (err) {
         console.log(err);
